@@ -1,0 +1,72 @@
+<div class="container-xxl py-6 pt-5" id="project">
+    <div class="container">
+        <div class="row g-5 mb-5 align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-5 mb-0">My Projects</h1>
+            </div>
+            <div class="col-lg-6 text-lg-end">
+                <ul class="list-inline mx-n3 mb-0" id="portfolio-flters">
+                    <li class="mx-3 active" data-filter="*">All Projects</li>
+                    <li class="mx-3" data-filter=".first">Ruby on Rails Projects</li>
+                    <li class="mx-3" data-filter=".second">React Projects</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" style="height: 50vh;">
+            <div class="col-md-6 first">
+                <div class="video-container" style="position: relative; overflow: hidden; height: 100%;">
+                    <video id="myVideo1" class="plyr__video-embed" data-plyr-provider="html5" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        <source src="<%= asset_path('devmatch.mp4') %>" type="video/mp4" />
+                    </video>
+                </div>
+                <h3 class="mt-2">DevMatch</h3>
+                <p class="justified-text">A social networking application that connects Developers, Investors, and Entrepreneurs, using Ruby on Rails</p>
+            </div>
+            <div class="col-md-6 second">
+                <div class="video-container" style="position: relative; overflow: hidden; height: 100%;">
+                    <video id="myVideo2" class="plyr__video-embed" data-plyr-provider="html5" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+                        <source src="<%= asset_path('') %>" type="video/mp4" />
+                    </video>
+                </div>
+                <h3 class="mt-2">My Rails App (Rails)</h3>
+                <p>A web application built with Ruby on Rails...</p>
+            </div>
+        </div>
+
+        <style>
+            .plyr--video {
+                width: 100%;
+                height: 100%;
+            }
+
+            .plyr--video.plyr--full-ui {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const player1 = new Plyr('#myVideo1');
+                const player2 = new Plyr('#myVideo2');
+
+                // Simple filter logic (replace with a library like Isotope for better filtering)
+                const filters = document.querySelectorAll('#portfolio-flters li');
+                filters.forEach(filter => {
+                    filter.addEventListener('click', function() {
+                        const filterValue = this.getAttribute('data-filter');
+                        const items = document.querySelectorAll('.col-md-6');
+                        items.forEach(item => {
+                            if (filterValue === '*' || item.classList.contains(filterValue.substring(1))) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            });
+        </script>
+    </div>
+</div>

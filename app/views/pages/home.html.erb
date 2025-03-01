@@ -1,0 +1,82 @@
+<div class="container-fluid bg-light my-6 mt-0" id="home">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 py-6 pb-0 pt-lg-0">
+                <h3 class="text-primary mb-3">I'm</h3>
+                <h1 class="display-3 mb-3">Choice Gabriel</h1>
+                <h2 class="typed-text-output d-inline"></h2>
+                <div class="typed-text d-none">
+                    Software Developer, Ruby on Rails Developer, Front End and Backend Developer, Apps Developer
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const typedTextElement = document.querySelector('.typed-text-output');
+                        const textToType = document.querySelector('.typed-text').textContent.split(', ');
+                        let textIndex = 0;
+                        let charIndex = 0;
+                        let isDeleting = false;
+                        let typingDelay = 200; // Adjust typing speed (milliseconds)
+                        let erasingDelay = 100; // Adjust erasing speed (milliseconds)
+                        let newTextDelay = 2000; // Delay before typing the next text (milliseconds)
+
+                        function type() {
+                            if (charIndex < textToType[textIndex].length) {
+                                typedTextElement.textContent += textToType[textIndex].charAt(charIndex);
+                                charIndex++;
+                                setTimeout(type, typingDelay);
+                            } else {
+                                setTimeout(erase, newTextDelay);
+                            }
+                        }
+
+                        function erase() {
+                            if (charIndex > 0) {
+                                typedTextElement.textContent = textToType[textIndex].substring(0, charIndex - 1);
+                                charIndex--;
+                                setTimeout(erase, erasingDelay);
+                            } else {
+                                isDeleting = false;
+                                textIndex++;
+                                if (textIndex >= textToType.length) {
+                                    textIndex = 0; // Loop back to the first text
+                                }
+                                setTimeout(type, typingDelay + 500); // Slight delay before next typing
+                            }
+                        }
+
+                        type(); // Start typing the first text
+                    });
+                </script>
+                <div class=" d-flex align-items-center pt-5">
+                    <%= link_to "Download CV", "#", class: "btn btn-primary py-3 px-4 me-5" %>
+                    <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                        <span></span>
+                    </button>
+                    <h5 class="ms-4 mb-0 d-none d-sm-block">Play Video</h5>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <%= image_tag "choice.png", class: "img-fluid", alt: "Choice Gabriel" %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Video Modal Start -->
+<div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 16:9 aspect ratio -->
+                <div class="ratio ratio-16x9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always" allow="autoplay"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Video Modal End -->
